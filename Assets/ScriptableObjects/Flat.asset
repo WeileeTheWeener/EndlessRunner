@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Flat
   m_EditorClassIdentifier: 
   platformType: 0
-  canEndWithPlatforms: 00000000
+  minAmountOfObstacles: 1
+  maxAmountOfObstacles: 1
+  canEndWithPlatformTypes: 00000000
+  compatibleObstacleTypes: 00000000

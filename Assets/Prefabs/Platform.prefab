@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2163890b6f883e48aa6d03acaa9e7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformSO: {fileID: 0}
+  platformSO: {fileID: 11400000, guid: 920bd8cca20b83e449a67487becfe0ff, type: 2}
+  obstacles: []

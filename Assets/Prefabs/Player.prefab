@@ -130,12 +130,12 @@ MonoBehaviour:
   inputVector: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   forwardSpeed: 25
-  horizontalSpeed: 15
+  horizontalSpeed: 12
   jumpSpeed: 25
   groundCheckRadius: 0.5
   groundCheckOffset: 0.75
   isGrounded: 0
-  airGravity: 70
+  airGravity: 100
   obstacleClimbSpeed: 1
 --- !u!114 &6186227623116462957
 MonoBehaviour:

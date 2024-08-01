@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,13 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] float generateNextPlatformDistance;
-    [SerializeField] PlatformGenerator generator;
+    [SerializeField] ObjectGenerator generator;
     [SerializeField] List<Platform> platforms;
-    [SerializeField] int maxPlatformCount;
 
     GameObject player;
 
     public List<Platform> Platforms { get => platforms; set => platforms = value; }
+    public ObjectGenerator Generator { get => generator; set => generator = value; }
 
     private void Awake()
     {
@@ -22,14 +23,14 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        generator.GeneratePlatform();
-        generator.GeneratePlatform();
+        Generator.GeneratePlatform();
+        Generator.GeneratePlatform();
     }
     private void Update()
     {
-        if(Vector3.Distance(generator.LastPlatform.transform.position, player.transform.position) < generateNextPlatformDistance)
+        if(Vector3.Distance(Generator.LastPlatform.transform.position, player.transform.position) < generateNextPlatformDistance)
         {
-            generator.GeneratePlatform();
-        }
+            Generator.GeneratePlatform();
+        }       
     }
 }

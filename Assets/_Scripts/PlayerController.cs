@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     CharacterController cc;
     PlayerInputActions inputActions;
     Vector3 movementVector;
-    Coroutine obstacleCrashCoroutine;
+    Coroutine obstacleClimbCoroutine;
     Vector3 obstacleHitPoint;
 
     private void Awake()
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     }
     private void HandleMovement()
     {
-        if (obstacleCrashCoroutine != null) return;
+        if (obstacleClimbCoroutine != null) return;
 
         Vector3 forwardVector = transform.forward * forwardSpeed;
         Vector3 horizontalVector = transform.right * inputVector.x * horizontalSpeed;
@@ -81,20 +81,20 @@ public class PlayerController : MonoBehaviour
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider != null && hit.transform.CompareTag("Obstacle") && obstacleCrashCoroutine == null)
+        if (hit.collider != null && hit.transform.CompareTag("Obstacle") && obstacleClimbCoroutine == null)
         {
             Debug.Log("Obstacle hit");
             obstacleHitPoint = hit.point;
-            obstacleCrashCoroutine = StartCoroutine(GoOverObstacle());          
+            obstacleClimbCoroutine = StartCoroutine(ClimbOverObstacle());          
         }
     }
-    private IEnumerator GoOverObstacle()
+    private IEnumerator ClimbOverObstacle()
     {
         Vector3 feetPosition = transform.position + Vector3.down * (cc.height / 2);
         float heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(transform.up * heightDistance * obstacleClimbSpeed);
         yield return new WaitForEndOfFrame();
-        obstacleCrashCoroutine = null;
+        obstacleClimbCoroutine = null;
     }
     public void OnMove(InputValue value)
     {

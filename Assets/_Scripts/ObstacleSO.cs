@@ -14,5 +14,6 @@ public class ObstacleSO : ScriptableObject
 
     public ObstacleType obstacleType;
 
-    public List<PlatformType> compatiblePlatforms;
+    public int minHeight, maxHeight;
+    public int minWidth, maxWidth;
 }
