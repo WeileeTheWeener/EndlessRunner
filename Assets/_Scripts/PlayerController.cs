@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Detection")]
     [SerializeField] float groundCheckRadius;
     [SerializeField] float groundCheckOffset;
+    [SerializeField] Platform lastStandingOnPlatform;
     [Header("Checks")]
     [SerializeField] bool isGrounded;
     [Header("Gravity")]
@@ -26,13 +27,17 @@ public class PlayerController : MonoBehaviour
     CharacterController cc;
     PlayerInputActions inputActions;
     Vector3 movementVector;
+    Coroutine takeDamageCoroutine;
     Coroutine obstacleClimbCoroutine;
-    Vector3 obstacleHitPoint;
+
+    public CharacterController Cc { get => cc; set => cc = value; }
+    public Platform LastStandingOnPlatform { get => lastStandingOnPlatform; set => lastStandingOnPlatform = value; }
+    public Coroutine ObstacleClimbCoroutine { get => obstacleClimbCoroutine; set => obstacleClimbCoroutine = value; }
+    public Coroutine TakeDamageCoroutine { get => takeDamageCoroutine; set => takeDamageCoroutine = value; }
 
     private void Awake()
     {
-        cc = GetComponent<CharacterController>();
-
+        Cc = GetComponent<CharacterController>();
         inputActions = new PlayerInputActions();
         inputActions.Player.Jump.performed += Jump_performed;
         inputActions.Enable();
@@ -47,7 +52,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        velocity = cc.velocity;
+        velocity = Cc.velocity;
 
         GroundCheck();
         HandleMovement();
@@ -59,12 +64,13 @@ public class PlayerController : MonoBehaviour
         if (colliders.Length > 0)
         {
             isGrounded = true;
+            LastStandingOnPlatform = colliders[0].gameObject.GetComponent<Platform>();
         }
         else isGrounded = false;
     }
     private void HandleMovement()
     {
-        if (obstacleClimbCoroutine != null) return;
+        if (takeDamageCoroutine != null || obstacleClimbCoroutine != null) return;
 
         Vector3 forwardVector = transform.forward * forwardSpeed;
         Vector3 horizontalVector = transform.right * inputVector.x * horizontalSpeed;
@@ -77,22 +83,13 @@ public class PlayerController : MonoBehaviour
         {
             movementVector.y += gravityVector.y * Time.deltaTime; 
         }
-        cc.Move(movementVector * Time.deltaTime);  
+        Cc.Move(movementVector * Time.deltaTime);  
     }
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.collider != null && hit.transform.CompareTag("Obstacle") && obstacleClimbCoroutine == null)
-        {
-            Debug.Log("Obstacle hit");
-            obstacleHitPoint = hit.point;
-            obstacleClimbCoroutine = StartCoroutine(ClimbOverObstacle());          
-        }
-    }
-    private IEnumerator ClimbOverObstacle()
+    public IEnumerator ClimbOverObstacle(Vector3 obstacleHitPoint)
     {
         Vector3 feetPosition = transform.position + Vector3.down * (cc.height / 2);
         float heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
-        cc.Move(transform.up * heightDistance * obstacleClimbSpeed);
+        cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
         yield return new WaitForEndOfFrame();
         obstacleClimbCoroutine = null;
     }
@@ -105,11 +102,5 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
-        Gizmos.color = Color.blue;
-
-        if(obstacleHitPoint != null)
-        {
-            Gizmos.DrawWireCube(obstacleHitPoint,Vector3.one / 10);
-        }
     }
 }

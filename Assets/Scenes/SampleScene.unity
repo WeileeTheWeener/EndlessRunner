@@ -225,25 +225,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 512669059770471502}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &63452057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63452051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48dc5cf1b8d721d42941c9b431c32e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceTraveled: 0
-  playerHealth: 0
-  playerMaxHealth: 3
-  healthImageHolder: {fileID: 917502258}
-  distanceTraveledText: {fileID: 208496545}
-  healthImagePrefab: {fileID: 1172775479229386222, guid: 37a18854fda471645a193398b41d1d6e,
-    type: 3}
 --- !u!1 &208496543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,6 +1266,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5f30bec68a34a14418ef67d3117184f9, type: 2}
   allObstaclePrefabs:
   - {fileID: 3954357900701910218, guid: 0bc3fefcb6572064e9e4717a6e9f3482, type: 3}
+  - {fileID: 3954357900701910218, guid: f31a95cffcd9d9f46808c5bebe417104, type: 3}
   allPlatformPrefabs:
   - {fileID: 9200394768070343423, guid: 8f1c6c8ce128084448d3a69920967ea1, type: 3}
 --- !u!114 &1736348449
@@ -1302,6 +1284,7 @@ MonoBehaviour:
   generateNextPlatformDistance: 100
   generator: {fileID: 1736348448}
   platforms: []
+  player: {fileID: 63452051}
 --- !u!4 &1736348450
 Transform:
   m_ObjectHideFlags: 0
@@ -1500,6 +1483,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3734632024918378036, guid: 3bb6ddad9f82b5743a84d866959a57a5,
+        type: 3}
+      propertyPath: healthImageHolder
+      value: 
+      objectReference: {fileID: 917502258}
+    - target: {fileID: 3734632024918378036, guid: 3bb6ddad9f82b5743a84d866959a57a5,
+        type: 3}
+      propertyPath: distanceTraveledText
+      value: 
+      objectReference: {fileID: 208496545}
     - target: {fileID: 5901408115064306879, guid: 3bb6ddad9f82b5743a84d866959a57a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1553,11 +1546,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 237819542854234664, guid: 3bb6ddad9f82b5743a84d866959a57a5,
-        type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 63452057}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb6ddad9f82b5743a84d866959a57a5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

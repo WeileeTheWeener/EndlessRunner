@@ -44,7 +44,6 @@ public class PlayerStats : MonoBehaviour
             healthPoints.Add(hpPoint);
         }       
     }
-    [ContextMenu("takedamage")]
     public void TakeDamage()
     {
         if (playerHealth == 0) return;

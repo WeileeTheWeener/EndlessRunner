@@ -13,6 +13,7 @@ public class ObstacleSO : ScriptableObject
     }
 
     public ObstacleType obstacleType;
+    public bool damagesPlayerOnImpact;
 
     public int minHeight, maxHeight;
     public int minWidth, maxWidth;
