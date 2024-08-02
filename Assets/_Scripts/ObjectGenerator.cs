@@ -15,14 +15,34 @@ public class ObjectGenerator : MonoBehaviour
 
     public Platform GeneratePlatform()
     {
-        GameObject platformPrefab = allPlatformPrefabs[Random.Range(0,allPlatformPrefabs.Count)];
+        GameObject platformPrefab;
+        Platform platformComp;
+
+        do
+        {
+            platformPrefab = allPlatformPrefabs[Random.Range(0, allPlatformPrefabs.Count)];
+            platformComp = platformPrefab.GetComponent<Platform>();
+
+        } while (!lastPlatform.PlatformSO.canEndWithPlatformTypes.Contains(platformComp.PlatformSO.platformType));
 
         GameObject generatedPlatform = Instantiate(platformPrefab);
-        generatedPlatform.transform.position = LastPlatform.transform.position + new Vector3(0,0,LastPlatform.transform.lossyScale.z);
-        generatedPlatform.GetComponent<MeshRenderer>().material = platformMaterials[Random.Range(0, platformMaterials.Count)];
+        platformComp = generatedPlatform.GetComponent<Platform>();
 
-        Platform platformComp = generatedPlatform.GetComponent<Platform>();
+        int randomScaleDepth = Random.Range(platformComp.PlatformSO.minScaleDepth, platformComp.PlatformSO.maxScaleDepth);
+        int randomScaleWidth = Random.Range(platformComp.PlatformSO.minScaleWidth, platformComp.PlatformSO.maxScaleWidth);
+        generatedPlatform.transform.localScale = new Vector3(randomScaleWidth, platformPrefab.transform.localScale.y, randomScaleDepth);
+
+        float lastPlatformDepth = LastPlatform.transform.localScale.z;
+        Vector3 newPosition = LastPlatform.transform.position + new Vector3(0, 0, lastPlatformDepth / 2f + randomScaleDepth / 2f);
+        generatedPlatform.transform.position = newPosition;
+
+        if(generatedPlatform.GetComponent<MeshRenderer>() != null)
+        {
+            generatedPlatform.GetComponent<MeshRenderer>().material = platformMaterials[Random.Range(0, platformMaterials.Count)];
+        }
+
         platformComp.GenerateObstacles();
+
         GameManager.instance.Platforms.Add(platformComp);
 
         LastPlatform = platformComp;

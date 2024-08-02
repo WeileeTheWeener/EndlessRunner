@@ -8,12 +8,20 @@ public class PlatformSO : ScriptableObject
 {
     public enum PlatformType
     {
-        flatGround
+        FlatGround,
+        Void
     }
 
     public PlatformType platformType;
-    public int minAmountOfObstacles,maxAmountOfObstacles;
-    
     public List<PlatformType> canEndWithPlatformTypes;
     public List<ObstacleType> compatibleObstacleTypes;
+
+    [Header("Procedural Values")]
+    public int minAmountOfObstacles;
+    public int maxAmountOfObstacles;
+    public int minScaleDepth;
+    public int maxScaleDepth;
+    public int minScaleWidth;
+    public int maxScaleWidth;
+    
 }

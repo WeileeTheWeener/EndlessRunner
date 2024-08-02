@@ -50,7 +50,7 @@ public class Obstacle : MonoBehaviour
     {
         player.TakeDamage();
         playerController.Cc.Move(-Vector3.forward * 10);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         playerController.TakeDamageCoroutine = null;
     }
     private void OnDrawGizmos()
