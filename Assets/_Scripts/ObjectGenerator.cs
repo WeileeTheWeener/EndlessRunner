@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     [SerializeField] Platform lastPlatform;
     [SerializeField] List<Material> platformMaterials;
 
@@ -43,7 +44,7 @@ public class ObjectGenerator : MonoBehaviour
 
         platformComp.GenerateObstacles();
 
-        GameManager.instance.Platforms.Add(platformComp);
+        gameManager.Platforms.Add(platformComp);
 
         LastPlatform = platformComp;
 

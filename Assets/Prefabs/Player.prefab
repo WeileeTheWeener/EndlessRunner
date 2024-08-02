@@ -153,10 +153,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceTraveled: 0
-  playerHealth: 0
-  playerMaxHealth: 3
+  health: 0
+  maxHealth: 3
+  stamina: 0
+  maxStamina: 100
+  staminaRechargeSpeed: 30
   healthImageHolder: {fileID: 0}
   distanceTraveledText: {fileID: 0}
+  staminaSlider: {fileID: 0}
   healthImagePrefab: {fileID: 1172775479229386222, guid: 37a18854fda471645a193398b41d1d6e,
     type: 3}
 --- !u!114 &6186227623116462957

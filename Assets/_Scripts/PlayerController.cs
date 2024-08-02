@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -29,7 +30,9 @@ public class PlayerController : MonoBehaviour
     Vector3 movementVector;
     Coroutine takeDamageCoroutine;
     Coroutine obstacleClimbCoroutine;
+    PlayerStats playerStats;
 
+    public UnityEvent OnPlayerDeath;
     public CharacterController Cc { get => cc; set => cc = value; }
     public Platform LastStandingOnPlatform { get => lastStandingOnPlatform; set => lastStandingOnPlatform = value; }
     public Coroutine ObstacleClimbCoroutine { get => obstacleClimbCoroutine; set => obstacleClimbCoroutine = value; }
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerStats = GetComponent<PlayerStats>();
         Cc = GetComponent<CharacterController>();
         inputActions = new PlayerInputActions();
         inputActions.Player.Jump.performed += Jump_performed;
@@ -48,6 +52,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             movementVector.y = jumpSpeed;
+            playerStats.AddOrSubtractStamina(false, 10);
         }
     }
     private void Update()
@@ -56,6 +61,12 @@ public class PlayerController : MonoBehaviour
 
         GroundCheck();
         HandleMovement();
+
+        //if we are falling fast
+        if (Cc.velocity.y < -200)
+        {
+            Die();
+        }
     }
     private void GroundCheck()
     {
@@ -90,14 +101,21 @@ public class PlayerController : MonoBehaviour
         Vector3 feetPosition = transform.position + Vector3.down * (cc.height / 2);
         float heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
+        playerStats.AddOrSubtractStamina(false, 2);
         yield return new WaitForEndOfFrame();
         obstacleClimbCoroutine = null;
     }
+
     public void OnMove(InputValue value)
     {
         Vector2 rawInput = value.Get<Vector2>();
         inputVector = new Vector3(rawInput.x, 0f, rawInput.y);
     }
+    public void Die()
+    {
+        OnPlayerDeath.Invoke();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

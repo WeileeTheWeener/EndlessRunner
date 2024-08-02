@@ -12,14 +12,16 @@ public class Obstacle : MonoBehaviour
     Vector3 obstacleHitPoint;
     Collider myCollider;
 
+    GameObject player;
     PlayerController playerController;
     PlayerStats playerStats;
 
     private void Start()
     {
         myCollider = gameObject.GetComponent<Collider>();
-        playerController = GameManager.instance.PlayerController;
-        playerStats = GameManager.instance.PlayerStats;
+        player = GameObject.Find("Player");
+        playerController = player.GetComponent<PlayerController>();
+        playerStats = player.GetComponent<PlayerStats>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,9 +51,13 @@ public class Obstacle : MonoBehaviour
     private IEnumerator DamagePlayer(PlayerStats player)
     {
         player.TakeDamage();
-        playerController.Cc.Move(-Vector3.forward * 10);
-        yield return new WaitForSeconds(0.7f);
-        playerController.TakeDamageCoroutine = null;
+
+        if (player.Health != 0)
+        {
+            playerController.Cc.Move(-Vector3.forward * 10);
+            yield return new WaitForSeconds(0.7f);
+            playerController.TakeDamageCoroutine = null;
+        }
     }
     private void OnDrawGizmos()
     {
