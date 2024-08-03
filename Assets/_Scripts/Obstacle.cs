@@ -28,34 +28,23 @@ public class Obstacle : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("player hit me");
+            Debug.Log(other.gameObject.name + " " + "hit the platform");
 
-                switch (obstacleSO.damagesPlayerOnImpact)
-                {
-                    case false:
-                        if (playerController.ObstacleClimbCoroutine == null)
-                        {
-                            obstacleHitPoint = myCollider.ClosestPointOnBounds(other.transform.position);
-                            playerController.ObstacleClimbCoroutine = StartCoroutine(playerController.ClimbOverObstacle(obstacleHitPoint));
-                        }
-                        break;
-                    case true:
-                        if (playerController.TakeDamageCoroutine == null)
-                        {
-                            playerController.TakeDamageCoroutine = StartCoroutine(DamagePlayer(playerStats));
-                        }
-                        break;
-                }
+            obstacleHitPoint = myCollider.ClosestPointOnBounds(other.transform.position);
+            playerController.ObstacleClimbCoroutine = StartCoroutine(playerController.ClimbOverObstacle(obstacleHitPoint));
+
+            if(obstacleSO.damagesPlayerOnImpact)
+            {
+                StartCoroutine(DamagePlayer(playerStats));
+            }
         }
     }
     private IEnumerator DamagePlayer(PlayerStats player)
     {
-        player.TakeDamage();
-
         if (player.Health != 0)
         {
-            playerController.Cc.Move(-Vector3.forward * 10);
-            yield return new WaitForSeconds(0.7f);
+            player.TakeDamage();
+            yield return new WaitForEndOfFrame();
             playerController.TakeDamageCoroutine = null;
         }
     }

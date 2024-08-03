@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     }
     private void HandleMovement()
     {
-        if (takeDamageCoroutine != null || obstacleClimbCoroutine != null) return;
+        //if (obstacleClimbCoroutine != null) return;
 
         Vector3 forwardVector = transform.forward * forwardSpeed;
         Vector3 horizontalVector = transform.right * inputVector.x * horizontalSpeed;
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnSlide()
     {
-        if (obstacleClimbCoroutine != null || takeDamageCoroutine != null || slideCoroutine != null) return;
+        if (obstacleClimbCoroutine != null || slideCoroutine != null) return;
 
         if (isGrounded)
         {

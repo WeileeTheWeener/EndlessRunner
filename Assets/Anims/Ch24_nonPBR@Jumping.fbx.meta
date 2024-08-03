@@ -36,7 +36,7 @@ ModelImporter:
       name: Jumping
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 14
+      firstFrame: 13
       lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
@@ -51,7 +51,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

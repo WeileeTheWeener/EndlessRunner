@@ -137,9 +137,9 @@ MonoBehaviour:
   forwardSpeed: 25
   horizontalSpeed: 10
   jumpSpeed: 20
-  slideDuration: 0.5
-  groundCheckRadius: 0.5
-  groundCheckOffset: 0.75
+  slideDuration: 1
+  groundCheckRadius: 0.3
+  groundCheckOffset: 1
   lastStandingOnPlatform: {fileID: 0}
   isGrounded: 0
   detectsCollisions: 0
