@@ -28,10 +28,11 @@ public class Obstacle : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            obstacleHitPoint = myCollider.ClosestPointOnBounds(other.transform.position);
+            //obstacleHitPoint = myCollider.ClosestPointOnBounds(other.transform.position);
+            obstacleHitPoint = myCollider.ClosestPointOnBounds(playerController.PlayersHeadObject.transform.position);
 
             //if its not touching the backside of players collider
-            if(obstacleHitPoint.z > other.transform.position.z)
+            if(obstacleHitPoint.z > other.transform.position.z && playerController.SlideCoroutine == null)
             {
                 Debug.Log(other.gameObject.name + " " + "hit the platform");
                 playerController.ObstacleClimbCoroutine = StartCoroutine(playerController.ClimbOverObstacle(obstacleHitPoint));

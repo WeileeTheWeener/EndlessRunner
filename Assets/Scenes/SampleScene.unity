@@ -717,6 +717,7 @@ MonoBehaviour:
   - {fileID: 3954357900701910218, guid: 0bc3fefcb6572064e9e4717a6e9f3482, type: 3}
   - {fileID: 3954357900701910218, guid: f31a95cffcd9d9f46808c5bebe417104, type: 3}
   - {fileID: 5707968406355128576, guid: 25b226023b32c1b469297a66449a22da, type: 3}
+  - {fileID: 5707968406355128576, guid: 9bf465a6ca1b9f24d895c555c04cb7ae, type: 3}
   allPlatformPrefabs:
   - {fileID: 9200394768070343423, guid: 8f1c6c8ce128084448d3a69920967ea1, type: 3}
   - {fileID: 9200394768070343423, guid: 34a74e5cf1b221049aa99e9349cff97b, type: 3}
@@ -1692,6 +1693,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1464577349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464577350}
+  m_Layer: 7
+  m_Name: PlayersHead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1464577350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464577349}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 12619046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1476272892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2520,6 +2552,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1264559395}
+    - target: {fileID: 6377229566018905723, guid: 3bb6ddad9f82b5743a84d866959a57a5,
+        type: 3}
+      propertyPath: playersHeadObject
+      value: 
+      objectReference: {fileID: 1464577349}
     - target: {fileID: 6652815923304681238, guid: 3bb6ddad9f82b5743a84d866959a57a5,
         type: 3}
       propertyPath: m_Radius
@@ -2547,6 +2584,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 1264559394}
+    - targetCorrespondingSourceObject: {fileID: 5901408115064306879, guid: 3bb6ddad9f82b5743a84d866959a57a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1464577350}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb6ddad9f82b5743a84d866959a57a5, type: 3}
 --- !u!1660057539 &9223372036854775807

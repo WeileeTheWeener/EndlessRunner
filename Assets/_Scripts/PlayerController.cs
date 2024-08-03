@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [Header("Obstacle")]
     [SerializeField] float obstacleClimbSpeed;
 
+    [SerializeField] GameObject playersHeadObject;
     CharacterController cc;
     PlayerInputActions inputActions;
     Vector3 movementVector;
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour
     public Platform LastStandingOnPlatform { get => lastStandingOnPlatform; set => lastStandingOnPlatform = value; }
     public Coroutine ObstacleClimbCoroutine { get => obstacleClimbCoroutine; set => obstacleClimbCoroutine = value; }
     public Coroutine TakeDamageCoroutine { get => takeDamageCoroutine; set => takeDamageCoroutine = value; }
+    public GameObject PlayersHeadObject { get => playersHeadObject; set => playersHeadObject = value; }
+    public Coroutine SlideCoroutine { get => slideCoroutine; set => slideCoroutine = value; }
 
     private void Awake()
     {
@@ -106,22 +109,22 @@ public class PlayerController : MonoBehaviour
     }
     public void OnSlide()
     {
-        if (obstacleClimbCoroutine != null || slideCoroutine != null) return;
+        if (obstacleClimbCoroutine != null || SlideCoroutine != null) return;
 
         if (isGrounded)
         {
             Debug.Log("sliding");
-            slideCoroutine = StartCoroutine(SlideCoroutine());
+            SlideCoroutine = StartCoroutine(Slide());
         }
     }
-    private IEnumerator SlideCoroutine()
+    private IEnumerator Slide()
     {
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, true);
         cc.Move(transform.forward);
         animator.CrossFade("Slide", 0.1f);
         yield return new WaitForSeconds(slideDuration);
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
-        slideCoroutine = null;
+        SlideCoroutine = null;
     }
     public IEnumerator ClimbOverObstacle(Vector3 obstacleHitPoint)
     {
