@@ -7,19 +7,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     [SerializeField] LayerMask groundCheckLayer;
+    [SerializeField] int playerLayer;
+    [SerializeField] int slideableObstacleLayer;
     [SerializeField] Vector3 inputVector;
     [SerializeField] Vector3 velocity;
     [Header("Movement")]
     [SerializeField] float forwardSpeed;
     [SerializeField] float horizontalSpeed;
     [SerializeField] float jumpSpeed;
+    [SerializeField] float slideDuration;
     [Header("Ground Detection")]
     [SerializeField] float groundCheckRadius;
     [SerializeField] float groundCheckOffset;
     [SerializeField] Platform lastStandingOnPlatform;
     [Header("Checks")]
     [SerializeField] bool isGrounded;
+    [SerializeField] bool detectsCollisions;
     [Header("Gravity")]
     [SerializeField] float airGravity;
     [Header("Obstacle")]
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour
     Vector3 movementVector;
     Coroutine takeDamageCoroutine;
     Coroutine obstacleClimbCoroutine;
+    Coroutine slideCoroutine;
     PlayerStats playerStats;
 
     public UnityEvent OnPlayerDeath;
@@ -52,12 +58,14 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             movementVector.y = jumpSpeed;
-            playerStats.AddOrSubtractStamina(false, 10);
+            animator.CrossFade("Jump",0.1f);
+            playerStats.AddOrSubtractStamina(false, 8);
         }
     }
     private void Update()
     {
         velocity = Cc.velocity;
+        detectsCollisions = cc.detectCollisions;
 
         GroundCheck();
         HandleMovement();
@@ -96,12 +104,42 @@ public class PlayerController : MonoBehaviour
         }
         Cc.Move(movementVector * Time.deltaTime);  
     }
+    public void OnSlide()
+    {
+        if (obstacleClimbCoroutine != null || takeDamageCoroutine != null || slideCoroutine != null) return;
+
+        if (isGrounded)
+        {
+            Debug.Log("sliding");
+            slideCoroutine = StartCoroutine(SlideCoroutine());
+        }
+    }
+    private IEnumerator SlideCoroutine()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, true);
+        cc.Move(transform.forward);
+        animator.CrossFade("Slide", 0.1f);
+        yield return new WaitForSeconds(slideDuration);
+        Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
+        slideCoroutine = null;
+    }
     public IEnumerator ClimbOverObstacle(Vector3 obstacleHitPoint)
     {
         Vector3 feetPosition = transform.position + Vector3.down * (cc.height / 2);
         float heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
         playerStats.AddOrSubtractStamina(false, 2);
+
+        int obstacleJumpAnimIndex = Random.Range(0, 2);
+        if(obstacleJumpAnimIndex == 0)
+        {
+            animator.CrossFade("ObstacleJump", 0.1f);
+        }
+        else
+        {
+            animator.CrossFade("ObstacleJump", 0.1f);
+        }
+        
         yield return new WaitForEndOfFrame();
         obstacleClimbCoroutine = null;
     }

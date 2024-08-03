@@ -126,20 +126,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448919e754cafb14b8cd8d3541e8be34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   groundCheckLayer:
     serializedVersion: 2
     m_Bits: 64
+  playerLayer: 7
+  slideableObstacleLayer: 9
   inputVector: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   forwardSpeed: 25
-  horizontalSpeed: 12
-  jumpSpeed: 25
+  horizontalSpeed: 10
+  jumpSpeed: 20
+  slideDuration: 0.5
   groundCheckRadius: 0.5
   groundCheckOffset: 0.75
   lastStandingOnPlatform: {fileID: 0}
   isGrounded: 0
+  detectsCollisions: 0
   airGravity: 100
   obstacleClimbSpeed: 1
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3734632024918378036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +161,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceTraveled: 0
+  bestScore: 0
   health: 0
   maxHealth: 3
   stamina: 0
   maxStamina: 100
-  staminaRechargeSpeed: 30
+  staminaRechargeSpeed: 50
   healthImageHolder: {fileID: 0}
   distanceTraveledText: {fileID: 0}
   staminaSlider: {fileID: 0}
