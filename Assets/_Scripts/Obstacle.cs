@@ -28,15 +28,20 @@ public class Obstacle : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log(other.gameObject.name + " " + "hit the platform");
-
             obstacleHitPoint = myCollider.ClosestPointOnBounds(other.transform.position);
-            playerController.ObstacleClimbCoroutine = StartCoroutine(playerController.ClimbOverObstacle(obstacleHitPoint));
 
-            if(obstacleSO.damagesPlayerOnImpact)
+            //if its not touching the backside of players collider
+            if(obstacleHitPoint.z > other.transform.position.z)
             {
-                StartCoroutine(DamagePlayer(playerStats));
+                Debug.Log(other.gameObject.name + " " + "hit the platform");
+                playerController.ObstacleClimbCoroutine = StartCoroutine(playerController.ClimbOverObstacle(obstacleHitPoint));
+
+                if(obstacleSO.damagesPlayerOnImpact)
+                {
+                     StartCoroutine(DamagePlayer(playerStats));
+                }
             }
+
         }
     }
     private IEnumerator DamagePlayer(PlayerStats player)
@@ -44,8 +49,7 @@ public class Obstacle : MonoBehaviour
         if (player.Health != 0)
         {
             player.TakeDamage();
-            yield return new WaitForEndOfFrame();
-            playerController.TakeDamageCoroutine = null;
+            yield return null;
         }
     }
     private void OnDrawGizmos()

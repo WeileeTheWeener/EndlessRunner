@@ -17,7 +17,7 @@ MonoBehaviour:
   compatibleObstacleTypes: 
   minAmountOfObstacles: 0
   maxAmountOfObstacles: 0
-  minScaleDepth: 0
+  minScaleDepth: 2
   maxScaleDepth: 7
   minScaleWidth: 0
   maxScaleWidth: 0
