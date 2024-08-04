@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+
     }
     private void GroundCheck()
     {
@@ -83,7 +84,6 @@ public class PlayerController : MonoBehaviour
     }
     private void HandleMovement()
     {
-        //if (obstacleClimbCoroutine != null) return;
 
         Vector3 forwardVector = transform.forward * forwardSpeed;
         Vector3 horizontalVector = transform.right * inputVector.x * horizontalSpeed;
@@ -137,9 +137,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(slideDuration);
 
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
-        SlideCoroutine = null;
         forwardSpeed = originalForwardSpeed;
         horizontalSpeed = originalHorizontalSpeed;
+        SlideCoroutine = null;
     }
     public IEnumerator ClimbOverObstacle(Vector3 obstacleHitPoint)
     {
@@ -150,11 +150,12 @@ public class PlayerController : MonoBehaviour
         Debug.Log(feetPosition.y);
         heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
+
         Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, true);
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, true);
         playerStats.AddOrSubtractStamina(false, 2);
 
-        int obstacleJumpAnimIndex = Random.Range(0,3);
+        int obstacleJumpAnimIndex = Random.Range(0,2);
         float waitForSeconds = 0;
 
         switch(obstacleJumpAnimIndex)
@@ -171,20 +172,16 @@ public class PlayerController : MonoBehaviour
                 horizontalSpeed = 3;
                 waitForSeconds = 0.2f;
                 break;
-            case 2:
-                animator.CrossFade("ObstacleJump3", 0.1f);
-                forwardSpeed = 5;
-                horizontalSpeed = 3;
-                waitForSeconds = 1f;
-                break;
         }
         
         yield return new WaitForSeconds(waitForSeconds);
+
         Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, false);
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
-        obstacleClimbCoroutine = null;
+
         forwardSpeed = originalForwardSpeed;
         horizontalSpeed = originalHorizontalSpeed;
+        obstacleClimbCoroutine = null;
     }
     public void Die()
     {

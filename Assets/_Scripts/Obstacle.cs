@@ -6,8 +6,9 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] ObstacleSO obstacleSO;
-
+    [SerializeField] float height;
     public ObstacleSO ObstacleSO { get => obstacleSO; set => obstacleSO = value; }
+    public float Height { get => height; set => height = value; }
 
     Vector3 obstacleHitPoint;
     Collider myCollider;

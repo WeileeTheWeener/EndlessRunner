@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSO: {fileID: 11400000, guid: b8093a70e32e7e14cbc98df61ef565eb, type: 2}
+  height: 0.4
 --- !u!65 &7335759617061576851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,11 +144,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &5286301825684723415
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class Platform : MonoBehaviour
     {
         int obstacleAmount = Random.Range(platformSO.minAmountOfObstacles, platformSO.maxAmountOfObstacles);
 
-        if(obstacleAmount > 0)
+        if (obstacleAmount > 0)
         {
             for (int i = 0; i < obstacleAmount; i++)
             {
@@ -32,9 +32,15 @@ public class Platform : MonoBehaviour
 
                 GameObject prefab = generator.GetRandomObstaclePrefabWithMatchingType(randomType);
                 GameObject obstacleObject = Instantiate(prefab);
-                Obstacle obstacleComp = obstacleObject.GetComponent<Obstacle>();    
+                Obstacle obstacleComp = obstacleObject.GetComponent<Obstacle>();
                 obstacleObject.transform.SetParent(transform, true);
+
                 Vector3 obstaclePos = GetRandomPointOnColliderTopSurface(col);
+
+                // Adjust the y-position based on the specified height
+                float obstacleHeight = obstacleComp.Height; // Assuming height is a public variable in Obstacle
+                obstaclePos.y += obstacleHeight;
+
                 obstacleObject.transform.position = obstaclePos;
                 lastGeneratedObstacle = obstacleComp;
             }

@@ -58,6 +58,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
-        playerController.StopAllCoroutines();
+        playerController.ObstacleClimbCoroutine = null;
     }
 }
