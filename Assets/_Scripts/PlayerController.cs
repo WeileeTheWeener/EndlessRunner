@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour
     [Header("Obstacle")]
     [SerializeField] float obstacleClimbSpeed;
 
+    float heightDistance;
     [SerializeField] GameObject playersHeadObject;
     CharacterController cc;
     Vector3 movementVector;
+    Vector3 feetPosition;
     Coroutine takeDamageCoroutine;
     Coroutine obstacleClimbCoroutine;
     Coroutine slideCoroutine;
@@ -138,9 +140,9 @@ public class PlayerController : MonoBehaviour
     {
         float originalForwardSpeed = forwardSpeed;
         forwardSpeed -= 10;
-        Vector3 feetPosition = transform.position + Vector3.down * (cc.height / 2);
+        feetPosition = transform.position + Vector3.down * (cc.height / 2);
         Debug.Log(feetPosition.y);
-        float heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
+        heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
         playerStats.AddOrSubtractStamina(false, 2);
 
@@ -166,5 +168,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(feetPosition, feetPosition + transform.up * heightDistance);
     }
 }
