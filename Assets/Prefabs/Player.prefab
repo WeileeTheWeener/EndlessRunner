@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 6377229566018905723}
   - component: {fileID: 3734632024918378036}
   - component: {fileID: 6186227623116462957}
+  - component: {fileID: 8194497907699698751}
+  - component: {fileID: 1063054703395191451}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -109,13 +111,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!114 &6377229566018905723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +139,8 @@ MonoBehaviour:
   inputVector: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   forwardSpeed: 25
-  horizontalSpeed: 10
-  jumpSpeed: 20
+  horizontalSpeed: 8
+  jumpSpeed: 15
   slideDuration: 1
   groundCheckRadius: 0.3
   groundCheckOffset: 1
@@ -168,8 +170,8 @@ MonoBehaviour:
   health: 0
   maxHealth: 3
   stamina: 0
-  maxStamina: 100
-  staminaRechargeSpeed: 50
+  maxStamina: 50
+  staminaRechargeSpeed: 2
   healthImageHolder: {fileID: 0}
   distanceTraveledText: {fileID: 0}
   staminaSlider: {fileID: 0}
@@ -206,6 +208,72 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8194497907699698751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237819542854234664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1063054703395191451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237819542854234664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c488018cc21e220468e49a22d14c2223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 8194497907699698751}
 --- !u!1 &561931756213947601
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,9 +326,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!1 &6655958158811006424
 GameObject:
   m_ObjectHideFlags: 0

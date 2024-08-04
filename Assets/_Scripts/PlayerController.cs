@@ -32,12 +32,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject playersHeadObject;
     CharacterController cc;
-    PlayerInputActions inputActions;
     Vector3 movementVector;
     Coroutine takeDamageCoroutine;
     Coroutine obstacleClimbCoroutine;
     Coroutine slideCoroutine;
     PlayerStats playerStats;
+    ScreenShake screenShake;
 
     public UnityEvent OnPlayerDeath;
     public CharacterController Cc { get => cc; set => cc = value; }
@@ -51,19 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         playerStats = GetComponent<PlayerStats>();
         Cc = GetComponent<CharacterController>();
-        inputActions = new PlayerInputActions();
-        inputActions.Player.Jump.performed += Jump_performed;
-        inputActions.Enable();
-    }
-
-    private void Jump_performed(InputAction.CallbackContext obj)
-    {
-        if (isGrounded)
-        {
-            movementVector.y = jumpSpeed;
-            animator.CrossFade("Jump",0.1f);
-            playerStats.AddOrSubtractStamina(false, 8);
-        }
+        screenShake = GetComponent<ScreenShake>();  
     }
     private void Update()
     {
@@ -107,6 +95,15 @@ public class PlayerController : MonoBehaviour
         }
         Cc.Move(movementVector * Time.deltaTime);  
     }
+    private void OnJump()
+    {
+        if (isGrounded)
+        {
+            movementVector.y = jumpSpeed;
+            animator.CrossFade("Jump", 0.1f);
+            playerStats.AddOrSubtractStamina(false, 4);
+        }
+    }
     public void OnSlide()
     {
         if (obstacleClimbCoroutine != null || SlideCoroutine != null) return;
@@ -117,18 +114,32 @@ public class PlayerController : MonoBehaviour
             SlideCoroutine = StartCoroutine(Slide());
         }
     }
+    public void OnMove(InputValue value)
+    {
+        Vector2 rawInput = value.Get<Vector2>();
+        inputVector = new Vector3(rawInput.x, 0f, rawInput.y);
+    }
     private IEnumerator Slide()
     {
+        float originalForwardSpeed = forwardSpeed;
+        float originalHorizontalSpeed = horizontalSpeed;
+        forwardSpeed -= 2;
+        horizontalSpeed -= 2;
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, true);
-        cc.Move(transform.forward);
         animator.CrossFade("Slide", 0.1f);
+        playerStats.AddOrSubtractStamina(false, 3);
         yield return new WaitForSeconds(slideDuration);
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
         SlideCoroutine = null;
+        forwardSpeed = originalForwardSpeed;
+        horizontalSpeed = originalHorizontalSpeed;
     }
     public IEnumerator ClimbOverObstacle(Vector3 obstacleHitPoint)
     {
+        float originalForwardSpeed = forwardSpeed;
+        forwardSpeed -= 10;
         Vector3 feetPosition = transform.position + Vector3.down * (cc.height / 2);
+        Debug.Log(feetPosition.y);
         float heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
         playerStats.AddOrSubtractStamina(false, 2);
@@ -140,23 +151,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.CrossFade("ObstacleJump", 0.1f);
+            animator.CrossFade("ObstacleJump2", 0.1f);
         }
         
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.2f);
         obstacleClimbCoroutine = null;
-    }
-
-    public void OnMove(InputValue value)
-    {
-        Vector2 rawInput = value.Get<Vector2>();
-        inputVector = new Vector3(rawInput.x, 0f, rawInput.y);
+        forwardSpeed = originalForwardSpeed;
     }
     public void Die()
     {
         OnPlayerDeath.Invoke();
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

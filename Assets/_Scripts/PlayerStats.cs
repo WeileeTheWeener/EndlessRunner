@@ -10,10 +10,13 @@ using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Stats")]
+    [Header("Score")]
     [SerializeField] float distanceTraveled;
     [SerializeField] float bestScore;
+    [Header("Health")]
     [SerializeField] int health;
     [SerializeField] int maxHealth;
+    [Header("Stamina")]
     [SerializeField] float stamina;
     [SerializeField] float maxStamina;
     [SerializeField] float staminaRechargeSpeed;
@@ -49,7 +52,7 @@ public class PlayerStats : MonoBehaviour
         DistanceTraveled = transform.position.z - playerStartingPoint.z;
         distanceTraveledText.text = DistanceTraveled.ToString("0") + " m";
 
-        AddOrSubtractStaminaOvertime(true, 0.05f);
+        AddOrSubtractStaminaOvertime(true);
     }
     private void InitializeStamina()
     {
@@ -105,15 +108,15 @@ public class PlayerStats : MonoBehaviour
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
         staminaSlider.value = stamina;
     }
-    public void AddOrSubtractStaminaOvertime(bool addValue, float value)
+    public void AddOrSubtractStaminaOvertime(bool addValue)
     {
         if (addValue)
         {
-            stamina = stamina + value * staminaRechargeSpeed * Time.deltaTime;
+            stamina = stamina + staminaRechargeSpeed * Time.deltaTime;
         }
         else
         {
-            stamina = stamina - value * staminaRechargeSpeed * Time.deltaTime;
+            stamina = stamina - staminaRechargeSpeed * Time.deltaTime;
         }
 
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
