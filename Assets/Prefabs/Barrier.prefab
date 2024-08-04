@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2091886076953245086}
   - component: {fileID: 877521561712013037}
   - component: {fileID: 3155164086193978151}
-  - component: {fileID: 7335759617061576851}
   - component: {fileID: 3791404478060815295}
+  - component: {fileID: 7335759617061576851}
   - component: {fileID: 1848400274167554627}
   - component: {fileID: 5286301825684723415}
   m_Layer: 8
@@ -87,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3791404478060815295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954357900701910218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd22dbf2eab478d48ad8979ce7f8fa39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleSO: {fileID: 11400000, guid: b8093a70e32e7e14cbc98df61ef565eb, type: 2}
 --- !u!65 &7335759617061576851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -108,19 +121,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3791404478060815295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3954357900701910218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd22dbf2eab478d48ad8979ce7f8fa39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleSO: {fileID: 11400000, guid: b8093a70e32e7e14cbc98df61ef565eb, type: 2}
 --- !u!54 &1848400274167554627
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4999852364133137214}
   - component: {fileID: 7432879816734858793}
   - component: {fileID: 3693253142182611959}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cone (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 4528169165093576801}
   - component: {fileID: 6113194812650040955}
   - component: {fileID: 457421436368779869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 162727301289187086}
   - component: {fileID: 7249540445216010421}
   - component: {fileID: 2288145790270502248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 470468609114686340}
   - component: {fileID: 8641653720651582546}
   - component: {fileID: 4530927253041692399}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1312,7 @@ GameObject:
   - component: {fileID: 5908208653234068331}
   - component: {fileID: 4952741835883541399}
   - component: {fileID: 2355640393550283147}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cone (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1857,7 +1857,7 @@ GameObject:
   - component: {fileID: 6402355969368481939}
   - component: {fileID: 6141908208408203690}
   - component: {fileID: 8651476234508635045}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cone (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2401,8 +2401,7 @@ GameObject:
   - component: {fileID: 6290442994644373671}
   - component: {fileID: 6705323525552907430}
   - component: {fileID: 7708046130475893901}
-  - component: {fileID: 8265522069628715491}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2474,27 +2473,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8265522069628715491
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2816635080600458785}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3402386021823206951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,7 +2485,7 @@ GameObject:
   - component: {fileID: 2147448028773453546}
   - component: {fileID: 5490998635099441170}
   - component: {fileID: 8385602951111222731}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cone (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3052,7 +3030,7 @@ GameObject:
   - component: {fileID: 7999106770231208655}
   - component: {fileID: 1538341447074873610}
   - component: {fileID: 3717864940650241305}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cone (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3597,7 +3575,8 @@ GameObject:
   - component: {fileID: 2599205363352958258}
   - component: {fileID: -391251017729716207}
   - component: {fileID: 3757409765574911784}
-  m_Layer: 0
+  - component: {fileID: 443067602565054974}
+  m_Layer: 9
   m_Name: SlideableBarrierWithSpikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3664,7 +3643,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -3687,5 +3666,26 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.34}
-  m_Center: {x: 2.56, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 2.29, y: 0, z: 0}
+--- !u!65 &443067602565054974
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707968406355128576}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 2.29, y: 0, z: 0}

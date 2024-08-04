@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] LayerMask groundCheckLayer;
     [SerializeField] int playerLayer;
+    [SerializeField] int obstacleLayer;
     [SerializeField] int slideableObstacleLayer;
     [SerializeField] Vector3 inputVector;
     [SerializeField] Vector3 velocity;
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnJump()
     {
-        if (isGrounded)
+        if (isGrounded && obstacleClimbCoroutine == null)
         {
             movementVector.y = jumpSpeed;
             animator.CrossFade("Jump", 0.1f);
@@ -123,14 +124,18 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator Slide()
     {
+        animator.CrossFade("Slide", 0.1f);
+
         float originalForwardSpeed = forwardSpeed;
         float originalHorizontalSpeed = horizontalSpeed;
-        forwardSpeed -= 2;
-        horizontalSpeed -= 2;
+        forwardSpeed -= 3;
+        horizontalSpeed -= 3;
+
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, true);
-        animator.CrossFade("Slide", 0.1f);
         playerStats.AddOrSubtractStamina(false, 3);
+
         yield return new WaitForSeconds(slideDuration);
+
         Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
         SlideCoroutine = null;
         forwardSpeed = originalForwardSpeed;
@@ -139,26 +144,47 @@ public class PlayerController : MonoBehaviour
     public IEnumerator ClimbOverObstacle(Vector3 obstacleHitPoint)
     {
         float originalForwardSpeed = forwardSpeed;
-        forwardSpeed -= 10;
-        feetPosition = transform.position + Vector3.down * (cc.height / 2);
+        float originalHorizontalSpeed = horizontalSpeed;
+
+        feetPosition = transform.position + cc.center + (Vector3.down * (cc.height / 2));
         Debug.Log(feetPosition.y);
         heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
+        Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, true);
+        Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, true);
         playerStats.AddOrSubtractStamina(false, 2);
 
-        int obstacleJumpAnimIndex = Random.Range(0, 2);
-        if(obstacleJumpAnimIndex == 0)
+        int obstacleJumpAnimIndex = Random.Range(0,3);
+        float waitForSeconds = 0;
+
+        switch(obstacleJumpAnimIndex)
         {
-            animator.CrossFade("ObstacleJump", 0.1f);
-        }
-        else
-        {
-            animator.CrossFade("ObstacleJump2", 0.1f);
+            case 0:
+                animator.CrossFade("ObstacleJump", 0.1f);
+                forwardSpeed = 15;
+                horizontalSpeed = 3;
+                waitForSeconds = 0.2f;
+                break;
+            case 1:
+                animator.CrossFade("ObstacleJump2", 0.1f);
+                forwardSpeed = 15;
+                horizontalSpeed = 3;
+                waitForSeconds = 0.2f;
+                break;
+            case 2:
+                animator.CrossFade("ObstacleJump3", 0.1f);
+                forwardSpeed = 5;
+                horizontalSpeed = 3;
+                waitForSeconds = 1f;
+                break;
         }
         
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(waitForSeconds);
+        Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, false);
+        Physics.IgnoreLayerCollision(playerLayer, slideableObstacleLayer, false);
         obstacleClimbCoroutine = null;
         forwardSpeed = originalForwardSpeed;
+        horizontalSpeed = originalHorizontalSpeed;
     }
     public void Die()
     {
