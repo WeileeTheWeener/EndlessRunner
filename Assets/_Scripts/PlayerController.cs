@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float slideDuration;
     [Header("Ground Detection")]
-    [SerializeField] float groundCheckRadius;
     [SerializeField] float groundCheckOffset;
+    [SerializeField] Vector3 groundCheckExtends;
     [SerializeField] Platform lastStandingOnPlatform;
     [Header("Checks")]
     [SerializeField] bool isGrounded;
@@ -54,14 +54,13 @@ public class PlayerController : MonoBehaviour
     {
         playerStats = GetComponent<PlayerStats>();
         Cc = GetComponent<CharacterController>();
-        screenShake = GetComponent<ScreenShake>();  
+        screenShake = GetComponent<ScreenShake>();
     }
     private void Update()
     {
         velocity = Cc.velocity;
         detectsCollisions = cc.detectCollisions;
 
-        GroundCheck();
         HandleMovement();
 
         //if we are falling fast
@@ -71,9 +70,29 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    private void LateUpdate()
+    {
+        GroundCheck();
+    }
     private void GroundCheck()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius, groundCheckLayer, QueryTriggerInteraction.Ignore);
+        /*Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius, groundCheckLayer, QueryTriggerInteraction.Ignore);
+
+        if (colliders.Length > 0)
+        {
+            foreach(Collider col in colliders)
+            {
+                if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    isGrounded = true;
+                    LastStandingOnPlatform = col.gameObject.GetComponent<Platform>();
+                    break;
+                }
+            }         
+        }
+        else isGrounded = false;*/
+
+        Collider[] colliders = Physics.OverlapBox(transform.position, groundCheckExtends, Quaternion.identity, groundCheckLayer, QueryTriggerInteraction.Ignore);
 
         if (colliders.Length > 0)
         {
@@ -146,7 +165,8 @@ public class PlayerController : MonoBehaviour
         float originalForwardSpeed = forwardSpeed;
         float originalHorizontalSpeed = horizontalSpeed;
 
-        feetPosition = transform.position + cc.center + (Vector3.down * (cc.height / 2));
+        //feetPosition = transform.position + cc.center + (Vector3.down * (cc.height / 2));
+        feetPosition = transform.position;
         Debug.Log(feetPosition.y);
         heightDistance = Mathf.Abs(feetPosition.y - obstacleHitPoint.y);
         cc.Move(obstacleClimbSpeed * heightDistance * cc.transform.up);
@@ -190,7 +210,8 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
+        //Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckOffset, groundCheckRadius);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * groundCheckOffset, groundCheckExtends);
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(feetPosition, feetPosition + transform.up * heightDistance);
     }

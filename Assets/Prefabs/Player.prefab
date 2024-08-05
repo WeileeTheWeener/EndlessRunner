@@ -112,12 +112,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.3
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &6377229566018905723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,12 +143,12 @@ MonoBehaviour:
   horizontalSpeed: 8
   jumpSpeed: 15
   slideDuration: 1
-  groundCheckRadius: 0.3
-  groundCheckOffset: 1
+  groundCheckOffset: 0
+  groundCheckDistance: 0.01
   lastStandingOnPlatform: {fileID: 0}
   isGrounded: 0
   detectsCollisions: 0
-  airGravity: 100
+  airGravity: 80
   obstacleClimbSpeed: 1
   playersHeadObject: {fileID: 6655958158811006424}
   OnPlayerDeath:
@@ -329,7 +329,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &6655958158811006424
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4741256818b829041bb42efe40b2506f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4741256818b829041bb42efe40b2506f,
         type: 3}
