@@ -21,3 +21,5 @@ MonoBehaviour:
   maxScaleDepth: 50
   minScaleWidth: 10
   maxScaleWidth: 15
+  minYPosDeviation: 0
+  maxYPosDeviation: 0

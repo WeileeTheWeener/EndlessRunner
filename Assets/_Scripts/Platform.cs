@@ -38,7 +38,7 @@ public class Platform : MonoBehaviour
                 Vector3 obstaclePos = GetRandomPointOnColliderTopSurface(col);
 
                 // Adjust the y-position based on the specified height
-                float obstacleHeight = obstacleComp.Height; // Assuming height is a public variable in Obstacle
+                float obstacleHeight = obstacleComp.height; // Assuming height is a public variable in Obstacle
                 obstaclePos.y += obstacleHeight;
 
                 obstacleObject.transform.position = obstaclePos;

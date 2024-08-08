@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-7935423092223681823
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #18_{-7935423092223681823}
+  m_AudioClip: {fileID: 8300000, guid: 65eab86193e3b124eb97a4a7c06c36d2, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7876962952783346988
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #6_{-7876962952783346988}
+  m_AudioClip: {fileID: 8300000, guid: d3a6d4ba1b5a38f4288a9ce9a02aaad6, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7645636009613650933
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #5_{-7645636009613650933}
+  m_AudioClip: {fileID: 8300000, guid: 81355dd7c45c0b94790dde821784ba20, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6181381317169884040
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #21_{-6181381317169884040}
+  m_AudioClip: {fileID: 8300000, guid: 98b9af033b4139145971805f95634606, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4729355800733342240
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #27_{-4729355800733342240}
+  m_AudioClip: {fileID: 8300000, guid: 3de8973dd7fba6146b04b33ff60cdb43, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4208080075463000148
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #25_{-4208080075463000148}
+  m_AudioClip: {fileID: 8300000, guid: 14ce123176ca1e645a735513938def56, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1785931353434308613
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #32_{1785931353434308613}
+  m_AudioClip: {fileID: 8300000, guid: a510c6931f18bea4d8880c9463102499, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5620197937948404649
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #37_{5620197937948404649}
+  m_AudioClip: {fileID: 8300000, guid: 49699d688deada442b352f3aa30b7d58, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5841576965697859999
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #14_{5841576965697859999}
+  m_AudioClip: {fileID: 8300000, guid: a94cabb61a6008045bbace7293757f69, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footsteps
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -76.40446, y: 62.921333}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 5841576965697859999}
+  - {fileID: -7935423092223681823}
+  - {fileID: -4729355800733342240}
+  - {fileID: -4208080075463000148}
+  - {fileID: -6181381317169884040}
+  - {fileID: 8092823775059560286}
+  - {fileID: 5620197937948404649}
+  - {fileID: 1785931353434308613}
+  - {fileID: -7645636009613650933}
+  - {fileID: -7876962952783346988}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 1
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8092823775059560286
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: footsteps3 - 565708__ralphwhitehead__footsteps-running-on-concrete-floor-fast-pace
+    - Marker #45_{8092823775059560286}
+  m_AudioClip: {fileID: 8300000, guid: d34b9ece2b3eec444993d8b4964f934e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

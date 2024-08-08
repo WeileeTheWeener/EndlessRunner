@@ -10,7 +10,8 @@ public class ObstacleSO : ScriptableObject
     public enum ObstacleType
     {
         Barrier,
-        SlideableBarrier
+        SlideableBarrier,
+        Wall
     }
 
     public ObstacleType obstacleType;

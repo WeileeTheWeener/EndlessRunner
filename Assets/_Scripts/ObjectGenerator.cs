@@ -31,10 +31,23 @@ public class ObjectGenerator : MonoBehaviour
 
         int randomScaleDepth = Random.Range(platformComp.PlatformSO.minScaleDepth, platformComp.PlatformSO.maxScaleDepth);
         int randomScaleWidth = Random.Range(platformComp.PlatformSO.minScaleWidth, platformComp.PlatformSO.maxScaleWidth);
+        int randomYDeviation = Random.Range(platformComp.PlatformSO.minYPosDeviation, platformComp.PlatformSO.maxYPosDeviation);
+        int yDeviation = Random.Range(0, 2);
         generatedPlatform.transform.localScale = new Vector3(randomScaleWidth, platformPrefab.transform.localScale.y, randomScaleDepth);
 
         float lastPlatformDepth = LastPlatform.transform.localScale.z;
-        Vector3 newPosition = LastPlatform.transform.position + new Vector3(0, 0, lastPlatformDepth / 2f + randomScaleDepth / 2f);
+        Vector3 newPosition = Vector3.zero;
+
+        if(yDeviation == 0)
+        {
+            newPosition = LastPlatform.transform.position + new Vector3(0, -randomYDeviation, lastPlatformDepth / 2f + randomScaleDepth / 2f);
+        }
+        else if(yDeviation == 1)
+        {
+            newPosition = LastPlatform.transform.position + new Vector3(0, randomYDeviation, lastPlatformDepth / 2f + randomScaleDepth / 2f);
+
+        }
+
         generatedPlatform.transform.position = newPosition;
 
         if(generatedPlatform.GetComponent<MeshRenderer>() != null)
@@ -55,13 +68,14 @@ public class ObjectGenerator : MonoBehaviour
         GameObject obstaclePrefab;
         Obstacle obstacleComp;
 
+        //fix bug here
         do
         {
             int prefabIndex = Random.Range(0, allObstaclePrefabs.Count);
             obstaclePrefab = allObstaclePrefabs[prefabIndex];
             obstacleComp = obstaclePrefab.GetComponent<Obstacle>();
 
-        } while (obstacleComp.ObstacleSO.obstacleType != obstacleType);
+        } while (obstacleComp.obstacleSO.obstacleType != obstacleType);
 
         return obstaclePrefab;
     }

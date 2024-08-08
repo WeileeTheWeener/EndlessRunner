@@ -23,5 +23,7 @@ public class PlatformSO : ScriptableObject
     public int maxScaleDepth;
     public int minScaleWidth;
     public int maxScaleWidth;
+    public int minYPosDeviation;
+    public int maxYPosDeviation;
     
 }

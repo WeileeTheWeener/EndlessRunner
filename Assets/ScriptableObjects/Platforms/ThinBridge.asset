@@ -19,5 +19,7 @@ MonoBehaviour:
   maxAmountOfObstacles: 1
   minScaleDepth: 10
   maxScaleDepth: 25
-  minScaleWidth: 5
+  minScaleWidth: 3
   maxScaleWidth: 10
+  minYPosDeviation: 0
+  maxYPosDeviation: 0
