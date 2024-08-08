@@ -76,15 +76,18 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState.GetStateName() != "run") return;
 
-        RaycastHit hit;
+        Collider[] colliders = Physics.OverlapSphere(obstacleDetector.transform.position, obstacleDetectorRadius, obstacleLayer, QueryTriggerInteraction.Ignore);      
 
-        if (Physics.SphereCast(obstacleDetector.transform.position, obstacleDetectorRadius, obstacleDetector.transform.forward, out hit, obstacleDetectorDistance, obstacleLayer, QueryTriggerInteraction.Ignore))
+        if (colliders.Length > 0 && colliders[0].transform.GetComponent<Obstacle>() != null)
         {
             Debug.Log("hit");
-            ObstacleSO obstacleS0 = hit.transform.GetComponent<Obstacle>().obstacleSO;
-            obstacleHitPoint = hit.collider.ClosestPointOnBounds(playersHeadObject.transform.position);
 
-            if (hit.point.z > transform.position.z)
+            Collider hit = colliders[0];
+
+            ObstacleSO obstacleS0 = hit.transform.GetComponent<Obstacle>().obstacleSO;
+            obstacleHitPoint = hit.ClosestPointOnBounds(playersHeadObject.transform.position);
+
+            if (hit.transform.position.z > transform.position.z)
             {
                 if (obstacleS0 != null && obstacleS0.damagesPlayerOnImpact)
                 {
@@ -95,6 +98,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        ICollectible collectible = hit.gameObject.GetComponent<ICollectible>();
+
+        if(collectible != null)
+        {
+            collectible.Collect();
+        }
+    }
     private void GroundCheck()
     {
         Collider[] colliders = Physics.OverlapBox(transform.position, groundCheckExtends, Quaternion.identity, groundCheckLayer, QueryTriggerInteraction.Ignore);
@@ -103,6 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
             lastStandingOnPlatform = colliders[0].gameObject.GetComponent<Platform>();
+            runState.jumpCount = 2;
         }
         else isGrounded = false;
     }

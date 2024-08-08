@@ -56,6 +56,7 @@ public class ObjectGenerator : MonoBehaviour
         }
 
         platformComp.GenerateObstacles();
+        platformComp.GenerateCollectibles();
 
         gameManager.Platforms.Add(platformComp);
 

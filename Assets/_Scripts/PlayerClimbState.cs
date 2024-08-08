@@ -9,9 +9,14 @@ public class PlayerClimbState : MonoBehaviour, IState
     [SerializeField] float climb1UpwardsPunch;
     [SerializeField] float climb2UpwardsPunch;
 
+    [Header("Movement")]
+    [SerializeField] float forwardSpeed;
+    [SerializeField] float horizontalSpeed;
+
+    [Header("Gravity")]
+    [SerializeField] float airGravity;
+
     [Header("Climb Anim")]
-    [SerializeField] float climbSpeedForward;
-    [SerializeField] float climbAmountUpwards;
     [SerializeField] float animExitTime;
 
     float climbHeightDistance;
@@ -32,12 +37,12 @@ public class PlayerClimbState : MonoBehaviour, IState
         switch (obstacleJumpAnimIndex)
         {
             case 0:
-                controller.animationHandler.animator.CrossFade("ObstacleJump", 0.1f);
                 controller.cc.Move(climb1UpwardsPunch * climbHeightDistance * controller.transform.up);
+                controller.animationHandler.animator.CrossFade("ObstacleJump", 0.1f);
                 break;
             case 1:
-                controller.animationHandler.animator.CrossFade("ObstacleJump2", 0.1f);
                 controller.cc.Move(climb2UpwardsPunch * climbHeightDistance * controller.transform.up);
+                controller.animationHandler.animator.CrossFade("ObstacleJump2", 0.1f);
                 break;
         }
     }
@@ -48,18 +53,33 @@ public class PlayerClimbState : MonoBehaviour, IState
     
     public void UpdateState()
     {
-        if (controller.animationHandler.animator.GetCurrentAnimatorStateInfo(0).IsTag("climb") &&
-    controller.animationHandler.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > animExitTime)
+
+        if (controller.animationHandler.animator.GetCurrentAnimatorStateInfo(0).IsTag("climb"))
         {
-            Debug.Log("anim finished");
-            controller.ChangeState(controller.runState);
+
+            Vector3 forwardVector = controller.transform.forward * forwardSpeed;
+            Vector3 horizontalVector = transform.right * controller.playerInputHandler.inputVector.x * horizontalSpeed;
+            Vector3 gravityVector = Vector3.down * airGravity;
+
+            controller.movementVector.x = horizontalVector.x + forwardVector.x + gravityVector.x;
+            controller.movementVector.z = horizontalVector.z + forwardVector.z + gravityVector.z;
+
+            if (!controller.isGrounded)
+            {
+                controller.movementVector.y += gravityVector.y * Time.deltaTime;
+            }
+
+            controller.cc.Move(controller.movementVector * Time.deltaTime);
+
+            if (controller.animationHandler.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > animExitTime)
+            {
+                Debug.Log("anim finished");
+                controller.ChangeState(controller.runState);
+            }
         }
     }
     public void OnAnimatorMoveLogic()
     {
-        delta = controller.animationHandler.animator.deltaPosition;
-        Vector3 climbMovement = (delta * climbAmountUpwards) + (climbSpeedForward * Time.deltaTime * controller.transform.forward);
-        controller.cc.Move(climbMovement);
     }
     public string GetStateName()
     {

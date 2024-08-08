@@ -10,6 +10,7 @@ public class Platform : MonoBehaviour
     Obstacle lastGeneratedObstacle;
     ObjectGenerator generator;
 
+
     public PlatformSO PlatformSO { get => platformSO; set => platformSO = value; }
 
     Collider col;
@@ -43,6 +44,27 @@ public class Platform : MonoBehaviour
 
                 obstacleObject.transform.position = obstaclePos;
                 lastGeneratedObstacle = obstacleComp;
+            }
+        }
+    }
+    public void GenerateCollectibles()
+    {
+        int collectibleAmount = Random.Range(platformSO.minAmountOfCollectibles, platformSO.maxAmountOfCollectibles);
+
+        if (collectibleAmount > 0)
+        {
+            for (int i = 0; i < collectibleAmount; i++)
+            {
+                int randomIndex = Random.Range(0, platformSO.availableCollectibles.Count);
+                GameObject randomCollectiblePrefab = platformSO.availableCollectibles[randomIndex].gameObject;
+
+                GameObject generatedCollectible = Instantiate(randomCollectiblePrefab);
+
+                generatedCollectible.transform.position = GetRandomPointOnColliderTopSurface(col);
+                float randomHeight = Random.Range(0.5f, 3.0f);
+                generatedCollectible.transform.position += new Vector3(0, randomHeight, 0);
+
+                generatedCollectible.transform.SetParent(transform, true);
             }
         }
     }

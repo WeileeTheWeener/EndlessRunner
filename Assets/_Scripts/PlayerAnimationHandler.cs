@@ -10,10 +10,13 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public UnityEvent OnAnimatorMoveEvent;
 
+    private void Update()
+    {
+        animator.SetBool("isGrounded", controller.isGrounded);
+    }
     private void OnAnimatorMove()
     {
-        if (controller.currentState.GetStateName() != "climb") return;
-        controller.currentState.OnAnimatorMoveLogic();
+
     }
 
 }

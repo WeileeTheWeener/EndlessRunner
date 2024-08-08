@@ -8,10 +8,11 @@ public class PlayerRunState : MonoBehaviour, IState
     [SerializeField] float forwardSpeed;
     [SerializeField] float horizontalSpeed;
     [SerializeField] public float jumpSpeed;
+    [SerializeField] public float doubleJumpSpeed;
+    [SerializeField] public int jumpCount;
 
     [Header("Gravity")]
     [SerializeField] float airGravity;
-
 
     public void EnterState(PlayerController controller)
     {

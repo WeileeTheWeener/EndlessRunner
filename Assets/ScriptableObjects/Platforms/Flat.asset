@@ -15,6 +15,8 @@ MonoBehaviour:
   platformType: 0
   canEndWithPlatformTypes: 0000000001000000
   compatibleObstacleTypes: 0000000001000000
+  availableCollectibles:
+  - {fileID: 6697228877624819035, guid: 4f55728397e551145975f0411f1371af, type: 3}
   minAmountOfObstacles: 1
   maxAmountOfObstacles: 1
   minScaleDepth: 25
@@ -23,3 +25,5 @@ MonoBehaviour:
   maxScaleWidth: 15
   minYPosDeviation: 0
   maxYPosDeviation: 0
+  minAmountOfCollectibles: 1
+  maxAmountOfCollectibles: 1

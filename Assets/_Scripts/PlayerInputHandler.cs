@@ -28,11 +28,21 @@ public class PlayerInputHandler : MonoBehaviour
     }
     private void OnJump()
     {
-        if (controller.isGrounded && controller.currentState.GetStateName() != "slide")
+        if (controller.currentState.GetStateName() == "slide") return;
+
+        if (controller.runState.jumpCount == 2 && controller.isGrounded)
         {
             controller.movementVector.y = controller.runState.jumpSpeed;
             controller.animationHandler.animator.CrossFade("Jump", 0.1f);
             controller.playerStats.AddOrSubtractStamina(false, 4);
+
+            controller.runState.jumpCount--;
+        }
+        else if(controller.runState.jumpCount == 1)
+        {
+            controller.movementVector.y = controller.runState.jumpSpeed;
+            controller.animationHandler.animator.CrossFade("JumpFlip", 0.1f);
+            controller.runState.jumpCount--;
         }
     }
 

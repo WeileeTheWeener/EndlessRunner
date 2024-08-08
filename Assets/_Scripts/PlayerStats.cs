@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController))]
@@ -20,19 +21,22 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float stamina;
     [SerializeField] float maxStamina;
     [SerializeField] float staminaRechargeSpeed;
+    [Header("Collectibles")]
+    [SerializeField] int gold;
 
     [Header("UI")]
     [SerializeField] GameObject healthImageHolder;
     [SerializeField] TMP_Text distanceTraveledText;
     List<HealthPoint> healthPoints = new List<HealthPoint>();
     [SerializeField] Slider staminaSlider;
-
+    [SerializeField] TMP_Text goldText;
 
     [Header("Prefabs")]
     [SerializeField] GameObject healthImagePrefab;
 
     Vector3 playerStartingPoint;
     PlayerController player;
+
 
     public float DistanceTraveled { get => distanceTraveled; set => distanceTraveled = value; }
     public float BestScore { get => bestScore; set => bestScore = value; }
@@ -121,6 +125,11 @@ public class PlayerStats : MonoBehaviour
 
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
         staminaSlider.value = stamina;
+    }
+    public void AddGold(int value)
+    {
+        gold += value;
+        goldText.text = "Gold : " + gold;
     }
     
 }
